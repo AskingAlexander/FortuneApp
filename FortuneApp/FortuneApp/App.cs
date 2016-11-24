@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -11,23 +12,21 @@ namespace FortuneApp
     {
         public App()
         {
-            // The root page of your application
+            // Where all the magic Happens
             MainPage = new MainPage();
         }
 
         protected override void OnStart()
         {
-            // Handle when your app starts
+            Debug.WriteLine("OnStart");
         }
-
         protected override void OnSleep()
         {
-            // Handle when your app sleeps
+            Debug.WriteLine("OnSleep");
         }
-
         protected override void OnResume()
         {
-            // Handle when your app resumes
+            Debug.WriteLine("OnResume");
         }
     }
 }

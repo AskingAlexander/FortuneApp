@@ -1,10 +1,13 @@
-﻿using System;
+﻿using FortuneApp.UWP;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
+using Xamarin.Forms;
 
+[assembly: Dependency(typeof(AudioService))]
 namespace FortuneApp.UWP
 {
     class AudioService : IAudio
