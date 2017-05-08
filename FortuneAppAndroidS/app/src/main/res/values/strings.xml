@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">FortuneApp</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="your_daily_dose_of_random_quotes">Your daily dose of random quotes</string>
+    <string name="fortuneapp">Fortune App</string>
+    <string name="memento_mori">Memento Mori</string>
+    <string name="get_some_fortune">Get Some Fortune!</string>
+</resources>
