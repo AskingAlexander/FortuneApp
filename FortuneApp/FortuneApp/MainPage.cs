@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using System.Threading.Tasks;
-using UIKit;
 using Xamarin.Forms;
 
 namespace FortuneApp
@@ -28,44 +26,66 @@ namespace FortuneApp
             };
             button.Clicked += OnButtonClicked;
 
-            TableView tableView = new TableView
+            Image logo = new Image
             {
-                Intent = TableIntent.Form,
-                Root = new TableRoot("")
-                {
-                    new TableSection("FortuneApp")
-                    {
-                        new ImageCell
-                        {
+                Source =
+                            Device.OnPlatform(ImageSource.FromUri(new Uri("http://i.imgur.com/iMFnuiy.png")),
+                                      ImageSource.FromFile("Logo.png"),
+                                      ImageSource.FromUri(new Uri("http://i.imgur.com/iMFnuiy.png"))),
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center
+            };
 
-                            ImageSource =
-                            Device.OnPlatform(ImageSource.FromUri(new Uri("http://i.imgur.com/JBZYlaU.png")),
-                                      ImageSource.FromFile("FortuneApp.png"),
-                                      ImageSource.FromUri(new Uri("http://i.imgur.com/JBZYlaU.png"))),
-                            Text = "FortuneApp",
-                            Detail = "!Your Daily dose of Random Quotes!"
-                        }
-                    }                   
-                }
+            Label header = new Label
+            {
+                Text = "Fortune App",
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center
+            };
+
+            Label motto = new Label
+            {
+                Text = "Your daily dose of random quotes",
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center
             };
 
             label = new Label
             {
+                Text = "Memento Mori",
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.CenterAndExpand
             };
 
-            Padding = new Thickness(5, Device.OnPlatform(20, 0, 0), 5, 0);
+            ScrollView textHandler = new ScrollView
+            {
+                Content = label,
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.CenterAndExpand
+            };
+
+            this.Padding = new Thickness(10, Device.OnPlatform(20, 0, 0), 10, 5);
+
+            BoxView justSpace = new BoxView
+            {
+                Color = Color.Transparent,
+                HeightRequest = 20
+            };
 
             // Build the page.
             this.Content = new StackLayout
-            {                
+            {
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center,
+                Spacing = 20,
                 Children =
                 {
-                    tableView,
-                    button,
-                    label
-                    
+                    header,
+                    logo,
+                    motto,
+                    justSpace,
+                    textHandler,
+                    button                    
                 }
             };
 
@@ -84,11 +104,6 @@ namespace FortuneApp
 
             toBeReturned = toBeReturned.Substring(1, toBeReturned.Length - 2);
 
-            if (toBeReturned.Length > 800)
-            {
-                toBeReturned = toBeReturned.Substring(0, 800);
-            }
-
             if (toBeReturned.Equals("Rate Limit Exceeded"))
             {
                 toBeReturned = "Memento Mori!";
@@ -104,7 +119,7 @@ namespace FortuneApp
 
         void OnButtonClicked(object sender, EventArgs args)
         {
-            DependencyService.Get<IAudio>().PlayAudioFile("hmmmm.wav");
+            DependencyService.Get<IAudio>().PlayAudioFile("hmm.wav");
 
             Uri uri = new Uri("https://helloacm.com/api/fortune/");
             WebRequest request = WebRequest.Create(uri);
